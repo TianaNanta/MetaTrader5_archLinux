@@ -39,21 +39,26 @@ chmod +x mt5archlinux.sh
 ./mt5archlinux.sh
 ```
 
-## 🔍 What This Script Does
+## 🔍 Features & What This Script Does
 
-1. **Checks internet connectivity**
-2. **Installs required dependencies**
-3. **Sets up an isolated Wine prefix** at `~/.wine_mt5`
-4. **Downloads the MT5 installer**
-5. **Launches the installer** using Wine
+1.  **System Checks:** Ensures `multilib` is enabled (required for Wine on Arch).
+2.  **Internet Connectivity:** Verifies network before starting.
+3.  **Dependency Management:** Installs `wine-staging`, `winetricks`, `wget`, etc.
+4.  **Wine Prefix Setup:** Creates an isolated environment at `~/.wine_mt5` configured for Windows 10.
+5.  **WebView2 Runtime:** Automatically installs WebView2 for modern MT5 features (Market, Signals).
+6.  **MetaTrader 5 Installer:** Downloads and launches the official MT5 setup.
+7.  **Desktop Integration:** Creates a `.desktop` file for your application menu with the official icon.
+8.  **Installation Metadata:** Saves installation details for future reference.
+
 
 ## 🏁 After Installation
 
-You can run MetaTrader 5 anytime using:
+You can launch MetaTrader 5 from your application menu or via the terminal:
 
 ```bash
 WINEPREFIX=~/.wine_mt5 wine "$HOME/.wine_mt5/drive_c/Program Files/MetaTrader 5/terminal64.exe"
 ```
+
 
 ## 🧹 Uninstallation
 
@@ -72,11 +77,16 @@ rm -rf ~/.wine_mt5 mt5setup.exe
 └── ~/.wine_mt5              # Wine prefix containing MT5
 ```
 
-## 🤖 Customization Ideas
+- **Prefix Persistence:** The script saves metadata in `~/.wine_mt5/.mt5_install_info`.
+- **Custom Icons:** The script uses `Misc/MetaTrader5.png` for desktop integration.
+## 🛠 Development
 
-- Use `Misc/mt5arch.sh` for an advanced installation including WebView2 and Desktop entry creation.
-- Automatically launch MT5 after install.
-- Customize Wine settings via `winecfg`.
+To verify the script's integrity:
+
+1.  **ShellCheck:** Run `shellcheck mt5archlinux.sh` to catch common shell script errors.
+2.  **Multilib Check:** Ensure your system has `multilib` enabled in `/etc/pacman.conf`.
+
+
 
 ## 📄 License
 

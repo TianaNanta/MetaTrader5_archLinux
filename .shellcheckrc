@@ -1,0 +1,11 @@
+# ShellCheck configuration file
+# For more info, see https://github.com/koalaman/shellcheck/wiki/Configuration
+
+# Enable all checks by default
+enable-all
+
+# Exclude some specific checks if they are too noisy
+# disable=SC2086 # Double quote to prevent globbing and word splitting.
+
+# Set the shell type to bash
+shell=bash

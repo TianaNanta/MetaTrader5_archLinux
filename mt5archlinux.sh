@@ -22,7 +22,7 @@ error() { echo -e "${RED}❌ $*${RESET}"; }
 warn() { echo -e "${YELLOW}⚠️  $*${RESET}"; }
 
 # --- Variables ---
-INSTALLER_URL="https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5setup.exe"
+INSTALLER_URL="https://download.terminal.free/cdn/web/metaquotes.ltd/mt5/mt5setup.exe"
 WINEPREFIX_PATH="$HOME/.wine_mt5"
 INSTALLER_NAME="mt5setup.exe"
 

@@ -28,6 +28,8 @@ WINEPREFIX_PATH="$HOME/.wine_mt5"
 INSTALLER_NAME="mt5setup.exe"
 WEBVIEW2_NAME="MicrosoftEdgeWebview2Setup.exe"
 
+# --- Functions ---
+
 check_multilib() {
   info "Checking if multilib is enabled..."
   if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
@@ -36,6 +38,9 @@ check_multilib() {
     info "Then run 'sudo pacman -Syu' and restart this script."
     exit 1
   fi
+  success "multilib is enabled."
+}
+
 confirm_installation() {
   read -p $'\nDo you want to install MetaTrader 5 on Arch Linux? [y/n]: ' confirm
   if [[ ! $confirm =~ ^[Yy]$ ]]; then
@@ -44,10 +49,6 @@ confirm_installation() {
   fi
 }
 
-  success "multilib is enabled."
-}
-
-# --- Functions ---
 check_network() {
   info "Checking internet connectivity..."
   if ! ping -q -c 1 -W 2 archlinux.org &>/dev/null; then
@@ -97,6 +98,7 @@ download_installers() {
     warn "WebView2 already exists: $WEBVIEW2_NAME (skipping download)"
   fi
 }
+
 install_webview() {
   info "Installing WebView2 Runtime..."
   if WINEPREFIX="$WINEPREFIX_PATH" wine "$WEBVIEW2_NAME" /silent /install &>/dev/null; then
@@ -106,12 +108,12 @@ install_webview() {
   fi
 }
 
-
 launch_installer() {
   info "Launching MetaTrader 5 installer..."
   WINEPREFIX="$WINEPREFIX_PATH" wine "$INSTALLER_NAME"
   success "Installer executed. Follow the on-screen instructions."
 }
+
 setup_dotDesktop() {
   wine_desktop="$HOME/.local/share/applications/wine/Programs/MetaTrader 5/MetaTrader 5.desktop"
   manual_desktop="$HOME/.local/share/applications/metatrader5.desktop"
@@ -150,6 +152,7 @@ EOF
     success "Manual desktop launcher created: $manual_desktop"
   fi
 }
+
 save_config() {
   info "Saving installation metadata..."
   {
@@ -159,9 +162,6 @@ save_config() {
   } > "$WINEPREFIX_PATH/.mt5_install_info"
   success "Metadata saved to $WINEPREFIX_PATH/.mt5_install_info"
 }
-
-
-
 
 # --- Main Execution ---
 check_multilib

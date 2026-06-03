@@ -1,0 +1,13 @@
+# Installers
+*.exe
+*.msi
+
+# Build and transient directories
+build/
+bin/
+obj/
+
+# System and hidden files
+.DS_Store
+Thumbs.db
+.wine_mt5/
